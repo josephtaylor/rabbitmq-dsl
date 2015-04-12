@@ -4,3 +4,5 @@ build
 lib
 log
 .gradle
+target
+dependency-reduced-pom.xml

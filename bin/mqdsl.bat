@@ -1,11 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set CP=%~dp0..\conf;
+set CP="";
 rem Add all jars in "lib" to CLASSPATH
-for %%j in ("%~dp0..\lib\*.jar") do set CP=!CP!%%~fj;
+rem for %%j in ("%~dp0..\lib\*.jar") do set CP=!CP!%%~fj;
 rem Add packaged jar
-for %%j in ("%~dp0..\target\*.jar") do set CP=!CP!%%~fj;
+for %%j in ("%~dp0..\target\rabbitmq*.jar") do set CP=!CP!%%~fj;
 
 set JAVA_OPTS=-Xmx128m %JAVA_OPTS%
 
