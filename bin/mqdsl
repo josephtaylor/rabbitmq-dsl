@@ -1,17 +1,6 @@
 #!/bin/bash
 
-MQDSL_BIN=`dirname "$0"`
-
-# Add all jars in "lib" to CLASSPATH
-#CLASSPATH=$MQDSL_BIN/../conf
-#for lib in $MQDSL_BIN/../lib/*.jar; do
-#  CLASSPATH=$lib:$CLASSPATH
-#done
-# Add packaged jar
-CLASSPATH=''
-for lib in $MQDSL_BIN/../target/rabbitmq*.jar; do
-  CLASSPATH=$lib:$CLASSPATH
-done
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Java settings (tweak to suit)
 if [ "x$JAVA" = "x" ]; then
@@ -19,9 +8,4 @@ if [ "x$JAVA" = "x" ]; then
 fi
 JAVA_OPTS="-Xmx128m $JAVA_OPTS"
 
-# Logging
-LOG_DIR=$MQDSL_BIN/../log
-
-#echo $CLASSPATH
-
-$JAVA -classpath $CLASSPATH $JAVA_OPTS -Dlog.dir="$LOG_DIR" com.jbrisbin.groovy.mqdsl.RabbitMQDsl $@
+$JAVA $JAVA_OPTS -jar $DIR/rabbitmq-dsl*.jar $@

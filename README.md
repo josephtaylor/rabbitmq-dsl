@@ -23,18 +23,7 @@ Clone the source code:
 Build a jar file of the command-line DSL runner:
 
     cd rabbitmq-dsl
-    ./gradlew jar
-
-Copy the dependencies into a directory called "lib":
-
-    ./gradlew copyDependencies
-    cp build/libs/rabbitmq-dsl-1.3.5-SNAPSHOT.jar lib
-
-Then create a directory for your log files (or edit the bash script to put log files elsewhere):
-
-    mkdir log
-
-These directories are not tracked in Git, so you have to keep them updated manually if you're building from source.
+    ./build.sh
 
 To use the DSL runner, execute the bash script located in "./bin":
 
@@ -47,7 +36,7 @@ You really, really, really should look at the test file to get a sense of what t
 #### Note on login information:
 
 If you create a file in your home directory called ".rabbitmqrc" and place the following properties inside it, you don't
-have to specify them on the command line:
+have to specify them on the command line nor use the init() function in the script:
 
     vi ~/.rabbitmqrc
     ...
@@ -91,6 +80,16 @@ syntax for working with a RabbitMQ server. For example, consider the following:
 The Groovy DSL is intended to be used to create compact, self-documenting code similar to what ActiveMQ users have with
 Camel. Nesting queues within exchanges ensures that an exchange exists and that all queues are properly bound before
 your Groovy code is actually run.
+
+You can use the init() function to setup the queue connection instead of using command-line args or ~/.rabbitmqrc
+
+    mq.init(
+       host: 'host',
+       port: 5672,
+       vhost: 'virtual-host'
+       username: 'username'
+       password: 'password'
+    )
 
 If you want an anonymous, server-generated queue name, set the "name" property to "null":
 

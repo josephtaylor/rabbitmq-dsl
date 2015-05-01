@@ -6,3 +6,6 @@ log
 .gradle
 target
 dependency-reduced-pom.xml
+bin/*.groovy
+bin/*.sh
+bin/*.jar
