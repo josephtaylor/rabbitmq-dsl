@@ -212,16 +212,13 @@ public class RabbitMQDsl {
 
 	private static Object run(Object o, GroovyShell shell, Binding binding) {
 		try {
-			log.info(o.toString());
 			Script script = null;
 			String var = null;
 			if (o instanceof File) {
 				File f = (File) o;
 				var = f.getName().replaceAll("\\.groovy$", "");
 				script = shell.parse(f);
-				log.info(script.toString());
 			} else if (o instanceof String) {
-				log.info((String) o);
 				script = shell.parse((String) o);
 			}
 			if (null != script && null != var) {
