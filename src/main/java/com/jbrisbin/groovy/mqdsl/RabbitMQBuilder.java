@@ -406,7 +406,8 @@ public class RabbitMQBuilder extends BuilderSupport {
 				currentExchange = new DirectExchange(name);
 			}
 			try {
-				rabbitAdmin.declareExchange(currentExchange);
+				rabbitTemplate.setExchange(name);
+				//rabbitAdmin.declareExchange(currentExchange);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				dispatchError(e);
@@ -436,8 +437,9 @@ public class RabbitMQBuilder extends BuilderSupport {
 					if (name == null) {
 						q = rabbitAdmin.declareQueue();
 					} else {
+						rabbitTemplate.setQueue(name);
 						q = new Queue(name, durable, exclusive, autoDelete);
-						rabbitAdmin.declareQueue(q);
+						//rabbitAdmin.declareQueue(q);
 					}
 					currentQueue = q;
 
